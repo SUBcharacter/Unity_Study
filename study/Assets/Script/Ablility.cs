@@ -1,18 +1,14 @@
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+public class Ability
 {
 
     public int ATK = 40;
 
-    void Start()
+    public Ability()
     {
+        Debug.Log("능력치 생성");
         Debug.Log($"ATK : {ATK}");
     }
-
     
-    void Update()
-    {
-        
-    }
 }
