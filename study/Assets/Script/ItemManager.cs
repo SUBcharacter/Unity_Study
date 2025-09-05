@@ -2,37 +2,37 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] gameObjects;
+    [SerializeField] Item[] items;
+    [SerializeField] int index;
     
-    int index = 0;
-    int lastIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach(GameObject go in gameObjects)
+        foreach(Item i in items)
         {
-            go.SetActive(false);
+            i.transform.gameObject.SetActive(false);
         }
+        index = items.Length -1 ;
+        
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            gameObjects[index].SetActive(true);
-
-            lastIndex = index;
-
-            index++;
-
-            if(lastIndex != index)
-            {
-                gameObjects[lastIndex].SetActive(false);
-            }
-
-            if(index > 3)
-            {
-                index = 0;
-            }
+            Swap();
         }
+        if(Input.GetMouseButtonDown(0))
+        {
+            items[index].Activate();
+        }
+    }
+
+    void Swap()
+    {
+        items[index].transform.gameObject.SetActive(false);
+
+        index = (index + 1) % items.Length;
+
+        items[index].transform.gameObject.SetActive(true);
     }
 }
