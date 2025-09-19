@@ -9,7 +9,7 @@ public class Sensor : MonoBehaviour
 
         if (!other.CompareTag("Ball"))
             return;
-        trigger = true;
+        other.GetComponent<Control>().Jump();
     }
 
     private void OnTriggerStay(Collider other)
@@ -18,8 +18,8 @@ public class Sensor : MonoBehaviour
 
         if (!other.CompareTag("Ball"))
             return;
-        trigger = true;
-        other.GetComponent<Control>().Jump();
+        
+        
         
     }
 
@@ -28,6 +28,6 @@ public class Sensor : MonoBehaviour
         Debug.Log("«ÿ¡¶");
         if (!other.CompareTag("Ball"))
             return;
-        trigger = false;
+        other.GetComponent<Control>().Init();
     }
 }

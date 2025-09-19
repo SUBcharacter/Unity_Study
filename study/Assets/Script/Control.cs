@@ -2,12 +2,23 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
-    public Vector3 dir;
     Rigidbody rigid;
+    public Vector3 dir;
+    [SerializeField] ForceMode forceMode;
+    [SerializeField] float speed;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
+        forceMode = ForceMode.Force;
+        speed = 5.0f;
+    }
+
+    public void Init()
+    {
+        dir = Vector3.zero;
+        speed = 5.0f;
+        forceMode = ForceMode.Force;
     }
 
     private void Update()
@@ -19,12 +30,15 @@ public class Control : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigid.AddForce(dir,ForceMode.Force);
+        rigid.AddForce(dir *speed, forceMode);
 
     }
 
     public void Jump()
     {
-        rigid.AddForce(Vector3.up*Time.fixedDeltaTime,ForceMode.Impulse);
+        speed = 1;
+        dir = Vector3.up;
+        forceMode = ForceMode.Impulse;
     }
+
 }
