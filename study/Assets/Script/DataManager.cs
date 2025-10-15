@@ -7,6 +7,8 @@ public class DataManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        channel = PlayerPrefs.GetInt("Channel");
+
         PlayerPrefs.SetInt("Channel", channel);
         
         PlayerPrefs.Save();
