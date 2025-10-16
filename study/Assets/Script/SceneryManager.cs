@@ -5,12 +5,21 @@ using UnityEngine.UI;
 
 public class SceneryManager : MonoBehaviour
 {
+    static SceneryManager instance;
     [SerializeField] Slider progress;
     [SerializeField] GameObject screen;
     
 
     private void Awake()
     {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -45,7 +54,9 @@ public class SceneryManager : MonoBehaviour
                 if(progress.value > 0.999f)
                 {
                     async.allowSceneActivation = true;
+                    yield return new WaitForSeconds(0.5f);
                     screen.SetActive(false);
+
                     yield break;
                 }
             }
